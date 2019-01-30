@@ -17,7 +17,7 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Push images to Docker Hub
-  - docker push steelersd/multi-client ./client
-  - docker push steelersd/multi-nginx ./nginx
-  - docker push steelersd/multi-server ./server
-  - docker push steelersd/multi-worker ./worker
+  - docker push steelersd/multi-client
+  - docker push steelersd/multi-nginx
+  - docker push steelersd/multi-server
+  - docker push steelersd/multi-worker
