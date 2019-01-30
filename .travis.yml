@@ -15,7 +15,8 @@ services:
     - docker build -t steelersd/multi-worker ./worker
 
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-# Push images to Docker Hub
+    
+    # Push images to Docker Hub
     - docker push steelersd/multi-client ./client
     - docker push steelersd/multi-nginx ./nginx
     - docker push steelersd/multi-server ./server
