@@ -1,0 +1,26 @@
+sudo: required
+services:
+  - docker
+
+  before_install:
+    - docker build -t steelersd/react-test -f  ./client/Dockerfile.dev ./client
+
+  script:
+    - docker run steelers/react-test npm test -- --coverage
+
+  after_success:
+    - docker build -t steelersd/multi-client ./client
+    - docker build -t steelersd/multi-nginx ./nginx
+    - docker build -t steelersd/multi-server ./server
+    - docker build -t steelersd/multi-worker ./worker
+
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+# Push images to Docker Hub
+    - docker push steelersd/multi-client ./client
+    - docker push steelersd/multi-nginx ./nginx
+    - docker push steelersd/multi-server ./server
+    - docker push steelersd/multi-worker ./worker
+
+
+
+  
