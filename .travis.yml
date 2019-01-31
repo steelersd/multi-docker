@@ -23,7 +23,7 @@ after_success:
   - docker push steelersd/multi-worker
 
 deploy:
-  provider: elasticbeanstock
+  provider: elasticbeanstalk
   region: us-east-2
   app: multi-docker
   env: MultiDocker-env
