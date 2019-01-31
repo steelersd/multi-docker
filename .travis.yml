@@ -21,3 +21,16 @@ after_success:
   - docker push steelersd/multi-nginx
   - docker push steelersd/multi-server
   - docker push steelersd/multi-worker
+
+deploy:
+  provider: elasticbeanstock
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-854836931922
+  bucket_path: docker-multi # looks like this is arbitrary
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
